@@ -10,7 +10,7 @@ import dagger.android.AndroidInjectionModule
 
 @Component(modules = arrayOf(AndroidInjectionModule::class,
                              AppModule::class,
-                             ActivityBuilder::class))
+                             ActivitiesModule::class))
 interface AppComponent {
   
   @Component.Builder

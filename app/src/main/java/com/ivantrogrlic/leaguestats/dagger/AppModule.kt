@@ -13,8 +13,7 @@ class AppModule {
   
   @Provides
   @Singleton
-  fun provideContext(application: Application): Context {
-    return application
-  }
+  fun provideContext(application: Application): Context = application
+  
   
 }
