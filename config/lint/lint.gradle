@@ -1,6 +1,6 @@
 android {
     lintOptions {
-        baseline file("lint-baseline.xml")
+        baseline file("$project.rootDir/config/lint/lint-baseline.xml")
         lintConfig file("$project.rootDir/config/lint/lint-config.xml")
 
         warningsAsErrors true

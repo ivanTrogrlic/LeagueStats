@@ -9,5 +9,7 @@
     Android Lint: False-positive Lint warning "unused resources" for resources in Kotlin code
     https://youtrack.jetbrains.com/issue/KT-12499 -->
     <issue id="UnusedResources" severity="ignore" />
+    <issue id="LintBaseline" severity="ignore" />
+    <issue id="IconLocation" severity="ignore" />
 
 </lint>
