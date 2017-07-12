@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "20244318349",
+    "firebase_url": "https://leaguestats-2332a.firebaseio.com",
+    "project_id": "leaguestats-2332a",
+    "storage_bucket": "leaguestats-2332a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20244318349:android:7e5e5d7e0fdf758c",
+        "android_client_info": {
+          "package_name": "com.ivantrogrlic.leaguestats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20244318349-7u4mdishk0n5o4rckhcv7qsnf3i1j38c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ivantrogrlic.leaguestats",
+            "certificate_hash": "ece21dd7ccacbf88ea3ae100ae112e654a797c01"
+          }
+        },
+        {
+          "client_id": "20244318349-8veht44fg7lk0opusi998s621sj8aut3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvXYJdCZXrxYkQ9PBRHQrUKL0jYkZL-dE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20244318349-8veht44fg7lk0opusi998s621sj8aut3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
