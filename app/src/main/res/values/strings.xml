@@ -2,4 +2,6 @@
     <string name="app_name">LeagueStats</string>
     <string name="image_logo_text">Image logo text</string>
     <string name="main_title">League of Legends</string>
+    <string name="summoner_name_hint">Summoner name</string>
+    <string name="main_screen_subtitle">To see your recent games statistics, enter your name and the server you play on.</string>
 </resources>
