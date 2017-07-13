@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/bottom_navigation_home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_champions"
+        android:enabled="true"
+        android:icon="@drawable/ic_data"
+        android:title="@string/bottom_navigation_champ_data"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_ladder"
+        android:enabled="true"
+        android:icon="@drawable/ic_ladder"
+        android:title="@string/bottom_navigation_ladder"
+        app:showAsAction="ifRoom" />
+</menu>
