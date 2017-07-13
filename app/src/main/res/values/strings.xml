@@ -8,4 +8,5 @@
     <string name="bottom_navigation_home">Home</string>
     <string name="bottom_navigation_champ_data">Champion stats</string>
     <string name="bottom_navigation_ladder">Ladder</string>
+    <string name="main_header_image">Header image</string>
 </resources>
