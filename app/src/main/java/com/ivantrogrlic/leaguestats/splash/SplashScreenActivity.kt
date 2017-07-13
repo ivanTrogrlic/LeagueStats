@@ -9,6 +9,9 @@ import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.main.MainActivity
 import kotlinx.android.synthetic.main.splash_screen.*
 
+/**
+ * Created by ivanTrogrlic on 12/07/2017.
+ */
 
 class SplashScreenActivity : AppCompatActivity() {
   
