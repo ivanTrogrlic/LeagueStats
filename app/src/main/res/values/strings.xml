@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LeagueStats</string>
+    <string name="splash_title">LeagueStats</string>
     <string name="image_logo_text">Image logo text</string>
     <string name="main_title">League of Legends</string>
     <string name="server_hint">Server</string>

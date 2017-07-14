@@ -20,11 +20,30 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    productFlavors {
+
+        dev {
+            applicationId "com.ivantrogrlic.leaguestats.dev"
+            testApplicationId "com.ivantrogrlic.leaguestats.test"
+
+            resValue "string", "app_name", "LeagueStatsDev"
+
+            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-abeb4e8b-da9c-447d-98da-e84da379ca43"'
+        }
+
     }
 
     sourceSets {
