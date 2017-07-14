@@ -2,6 +2,7 @@ package com.ivantrogrlic.leaguestats.dagger
 
 import android.app.Application
 import com.ivantrogrlic.leaguestats.LeagueStatsApplication
+import com.ivantrogrlic.leaguestats.rest.NetComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -20,4 +21,7 @@ interface AppComponent {
   }
   
   fun inject(app: LeagueStatsApplication)
+  
+  fun netComponentBuilder(): NetComponent.Builder
+  
 }

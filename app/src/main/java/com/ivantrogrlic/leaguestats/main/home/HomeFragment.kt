@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.mosby3.mvp.MvpFragment
+import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
 
 /**
@@ -25,7 +26,7 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
   
   
   override fun createPresenter(): HomePresenter {
-    return HomePresenter()
+    return HomePresenter((activity.application as LeagueStatsApplication).netComponent()!!.retrofit())
   }
   
   override fun doSomething() {
