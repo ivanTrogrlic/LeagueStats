@@ -2,7 +2,6 @@ package com.ivantrogrlic.leaguestats.main.home
 
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
-import com.ivantrogrlic.leaguestats.BuildConfig
 import com.ivantrogrlic.leaguestats.rest.RiotWebService
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
@@ -18,7 +17,7 @@ class HomePresenter constructor(val retrofit: Retrofit) : MvpBasePresenter<HomeV
     
     val riotWebService = retrofit.create(RiotWebService::class.java)
     riotWebService
-        .summoner("vindfaker9", BuildConfig.RIOT_API_KEY)
+        .summoner("vindfaker9")
         .firstOrError()
         .subscribeOn(Schedulers.io())
         .subscribe({ Log.d("Trogy", it.toString()) }, { Log.d("Trogy", it.toString()) })

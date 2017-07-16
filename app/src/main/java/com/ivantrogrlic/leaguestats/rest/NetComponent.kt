@@ -2,6 +2,7 @@ package com.ivantrogrlic.leaguestats.rest
 
 import com.ivantrogrlic.leaguestats.dagger.PerServer
 import dagger.Subcomponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
@@ -15,6 +16,7 @@ interface NetComponent {
   
   fun retrofit(): Retrofit
   fun okHttp(): OkHttpClient
+  fun requestInterceptor(): Interceptor
   
   @Subcomponent.Builder
   interface Builder {

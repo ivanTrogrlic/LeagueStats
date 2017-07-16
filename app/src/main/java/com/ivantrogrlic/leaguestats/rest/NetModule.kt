@@ -3,6 +3,7 @@ package com.ivantrogrlic.leaguestats.rest
 import com.ivantrogrlic.leaguestats.dagger.PerServer
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -18,8 +19,14 @@ import java.util.concurrent.TimeUnit
 class NetModule(val baseUrl: String) {
   
   @Provides
-  fun okHttpClient(): OkHttpClient =
+  @PerServer
+  fun requestInterceptor(interceptor: RequestInterceptor): Interceptor = interceptor
+  
+  @Provides
+  @PerServer
+  fun okHttpClient(requestInterceptor: Interceptor): OkHttpClient =
       OkHttpClient.Builder()
+          .addInterceptor(requestInterceptor)
           .connectTimeout(100, TimeUnit.SECONDS)
           .readTimeout(100, TimeUnit.SECONDS)
           .build()
