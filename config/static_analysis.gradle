@@ -7,5 +7,5 @@ task staticAnalysis {
     description 'Generate StaticAnalysis reports.'
 
     dependsOn 'detektCheck'
-    dependsOn 'lintDebug'
+    dependsOn 'lintDevRelease'
 }

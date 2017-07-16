@@ -9,4 +9,18 @@
     <string name="bottom_navigation_champ_data">Champion stats</string>
     <string name="bottom_navigation_ladder">Ladder</string>
     <string name="main_header_image">Header image</string>
+    <string name="server_dialog_title">Select server</string>
+    <string name="general_ok">OK</string>
+
+    <string name="server_br">Brazil</string>
+    <string name="server_eune">EU Nordic &amp; East</string>
+    <string name="server_euw">EU West</string>
+    <string name="server_na">North America</string>
+    <string name="server_las">Latin America South</string>
+    <string name="server_lan">Latin America North</string>
+    <string name="server_oce">Oceania</string>
+    <string name="server_ru">Russia</string>
+    <string name="server_tr">Turkey</string>
+    <string name="server_jp">Japan</string>
+    <string name="server_kr">Korea</string>
 </resources>

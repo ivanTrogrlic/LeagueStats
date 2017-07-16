@@ -13,9 +13,12 @@ import javax.inject.Inject
 /** Created by ivanTrogrlic on 12/07/2017. */
 class LeagueStatsApplication : Application(), HasActivityInjector {
   
+  companion object {
+    lateinit var appComponent: AppComponent
+    var netComponent: NetComponent? = null
+  }
+  
   @Inject lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-  private lateinit var appComponent: AppComponent
-  private var netComponent: NetComponent? = null
   
   override fun onCreate() {
     super.onCreate()

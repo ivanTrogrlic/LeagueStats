@@ -2,6 +2,7 @@ package com.ivantrogrlic.leaguestats.dagger
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import com.ivantrogrlic.leaguestats.rest.NetComponent
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,14 @@ class AppModule {
   @Provides
   @Singleton
   fun provideContext(application: Application): Context = application
+  
+  @Provides
+  @Singleton
+  fun sharedPreferencesName(): String = "LeagueStatsPrefs"
+  
+  @Provides
+  @Singleton
+  fun sharedPreferences(context: Context, sharedPreferencesName: String): SharedPreferences =
+      context.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
   
 }
