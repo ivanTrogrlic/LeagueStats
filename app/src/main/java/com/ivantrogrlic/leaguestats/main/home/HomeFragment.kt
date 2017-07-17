@@ -1,6 +1,8 @@
 package com.ivantrogrlic.leaguestats.main.home
 
+import android.graphics.drawable.Animatable
 import android.os.Bundle
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,14 +24,18 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
   
   override fun onCreateView(inflater: LayoutInflater,
                             container: ViewGroup?,
-                            savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.home_fragment, container, false)
-    
-    search.setOnClickListener { getPresenter().searchForSummoner(summoner_input.text.toString()) }
-    
-    return view
-  }
+                            savedInstanceState: Bundle?): View? =
+      inflater.inflate(R.layout.home_fragment, container, false)
   
+  override fun onResume() {
+    super.onResume()
+    search.setOnClickListener { (search.drawable as Animatable).start() }
+    summoner_input.setOnClickListener {
+      val create = AnimatedVectorDrawableCompat.create(context, R.drawable.search_animation_stop)
+      search.setImageDrawable(create)
+      (create as Animatable).start()
+    }
+  }
   
   override fun createPresenter(): HomePresenter {
     return HomePresenter((activity.application as LeagueStatsApplication).netComponent()!!.retrofit())

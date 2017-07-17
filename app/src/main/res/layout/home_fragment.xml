@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/home_background"
@@ -47,20 +48,19 @@
                     android:id="@+id/summoner_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/summoner_name_hint" />
+                    android:hint="@string/summoner_name_hint"
+                    android:textColorHint="@color/colorPrimary" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/search_button"
                 android:contentDescription="@string/search_for_summoner"
-                android:elevation="3dp"
-                android:padding="8dp"
-                android:src="@drawable/ic_search" />
+                android:src="@drawable/search_animation"
+                tools:context=".main.MainActivity" />
 
         </LinearLayout>
 

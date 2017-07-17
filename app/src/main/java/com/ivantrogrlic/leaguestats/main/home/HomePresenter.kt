@@ -23,8 +23,8 @@ class HomePresenter constructor(private val retrofit: Retrofit) : MvpBasePresent
         .subscribe({ Log.d("Trogy", it.toString()) }, { Log.d("Trogy", it.toString()) })
   }
   
-  fun searchForSummoner(summoner: String){
-    
+  fun searchForSummoner(summoner: String) {
+    TODO()
   }
   
 }
