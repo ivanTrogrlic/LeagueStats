@@ -10,6 +10,7 @@
     <string name="bottom_navigation_ladder">Ladder</string>
     <string name="main_header_image">Header image</string>
     <string name="server_dialog_title">Select server</string>
+    <string name="search_for_summoner">Search for summoner</string>
     <string name="general_ok">OK</string>
 
     <string name="server_br">Brazil</string>

@@ -10,7 +10,7 @@ import retrofit2.Retrofit
  * Created by ivanTrogrlic on 14/07/2017.
  */
 
-class HomePresenter constructor(val retrofit: Retrofit) : MvpBasePresenter<HomeView>() {
+class HomePresenter constructor(private val retrofit: Retrofit) : MvpBasePresenter<HomeView>() {
   
   override fun attachView(view: HomeView?) {
     super.attachView(view)
@@ -22,4 +22,9 @@ class HomePresenter constructor(val retrofit: Retrofit) : MvpBasePresenter<HomeV
         .subscribeOn(Schedulers.io())
         .subscribe({ Log.d("Trogy", it.toString()) }, { Log.d("Trogy", it.toString()) })
   }
+  
+  fun searchForSummoner(summoner: String){
+    
+  }
+  
 }
