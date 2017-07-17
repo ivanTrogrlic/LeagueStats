@@ -1,6 +1,7 @@
 package com.ivantrogrlic.leaguestats.dagger
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.rest.NetComponent
@@ -26,6 +27,8 @@ interface AppComponent {
   fun inject(app: LeagueStatsApplication)
   
   fun netComponentBuilder(): NetComponent.Builder
+  
+  fun context(): Context
   
   fun sharedPreferences(): SharedPreferences
   

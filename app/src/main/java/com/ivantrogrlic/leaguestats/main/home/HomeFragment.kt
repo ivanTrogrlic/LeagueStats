@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.hannesdorfmann.mosby3.mvp.MvpFragment
 import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
+import com.ivantrogrlic.leaguestats.model.Summoner
 import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
@@ -29,20 +30,31 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
   
   override fun onResume() {
     super.onResume()
-    search.setOnClickListener { (search.drawable as Animatable).start() }
-    summoner_input.setOnClickListener {
-      val create = AnimatedVectorDrawableCompat.create(context, R.drawable.search_animation_stop)
-      search.setImageDrawable(create)
-      (create as Animatable).start()
+    search.setOnClickListener {
+      (search.drawable as Animatable).start()
+      getPresenter().searchForSummoner(summoner_input.text.toString())
     }
   }
   
   override fun createPresenter(): HomePresenter {
-    return HomePresenter((activity.application as LeagueStatsApplication).netComponent()!!.retrofit())
+    val application = activity.application as LeagueStatsApplication
+    return HomePresenter(application.component().context(),
+                         application.component().sharedPreferences(),
+                         application.netComponent()!!.retrofit())
   }
   
-  override fun loadSummoner() {
+  override fun setHint(text: String) {
+    hint.text = text
+  }
+  
+  override fun summonerLoaded(summoner: Summoner) {
     
+  }
+  
+  override fun searchingFailed() {
+    val create = AnimatedVectorDrawableCompat.create(context, R.drawable.search_animation_stop)
+    search.setImageDrawable(create)
+    (create as Animatable).start()
   }
   
 }

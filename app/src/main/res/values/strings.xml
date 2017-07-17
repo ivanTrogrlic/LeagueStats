@@ -4,7 +4,7 @@
     <string name="main_title">League of Legends</string>
     <string name="server_hint">Server</string>
     <string name="summoner_name_hint">Summoner name</string>
-    <string name="main_screen_subtitle">To see recent games statistics, enter summoner name and select the server you play on.</string>
+    <string name="main_screen_subtitle" formatted="false">To see recent games statistics, enter summoner name.\nServer: %s</string>
     <string name="bottom_navigation_home">Home</string>
     <string name="bottom_navigation_champ_data">Champion stats</string>
     <string name="bottom_navigation_ladder">Ladder</string>

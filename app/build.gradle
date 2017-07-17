@@ -41,7 +41,7 @@ android {
 
             resValue "string", "app_name", "LeagueStatsDev"
 
-            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-52f29627-4355-4972-84d4-6dc685d308df"'
+            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-656298c3-5e32-4415-b10e-d872198ca497"'
         }
 
     }
@@ -87,6 +87,7 @@ dependencies {
 
     // RxJava 2
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+    compile('io.reactivex.rxjava2:rxandroid:2.0.1') { exclude module: 'rxjava' }
 
     // Gson
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.1'

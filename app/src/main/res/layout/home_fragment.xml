@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/home_background"
@@ -26,15 +25,17 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:focusableInTouchMode="true"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
             android:focusableInTouchMode="true"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingEnd="24dp"
             android:paddingStart="24dp">
@@ -58,19 +59,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:background="@drawable/search_button"
                 android:contentDescription="@string/search_for_summoner"
-                android:src="@drawable/search_animation"
-                tools:context=".main.MainActivity" />
+                android:elevation="5dp"
+                android:src="@drawable/search_animation" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/hint"
                 style="@style/Base.TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,9 +82,7 @@
                 android:layout_marginStart="36dp"
                 android:background="@drawable/main_screen_hint_background"
                 android:elevation="5dp"
-                android:gravity="center"
                 android:padding="16dp"
-                android:text="@string/main_screen_subtitle"
                 android:textColor="@color/white" />
 
         </LinearLayout>
