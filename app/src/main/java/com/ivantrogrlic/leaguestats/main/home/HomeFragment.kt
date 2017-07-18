@@ -2,6 +2,7 @@ package com.ivantrogrlic.leaguestats.main.home
 
 import android.graphics.drawable.Animatable
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.graphics.drawable.AnimatedVectorDrawableCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,7 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
   override fun onResume() {
     super.onResume()
     search.setOnClickListener {
-      (search.drawable as Animatable).start()
+      startSearchAnimation(R.drawable.search_animation)
       getPresenter().searchForSummoner(summoner_input.text.toString())
     }
   }
@@ -48,11 +49,21 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
   }
   
   override fun summonerLoaded(summoner: Summoner) {
-    
+    TODO("Navigate to the next activity")
   }
   
   override fun searchingFailed() {
-    val create = AnimatedVectorDrawableCompat.create(context, R.drawable.search_animation_stop)
+    startSearchAnimation(R.drawable.search_animation_stop)
+    summoner_input.error = context.getString(R.string.summoner_search_failed_general)
+  }
+  
+  override fun summonerNotFound() {
+    startSearchAnimation(R.drawable.search_animation_stop)
+    summoner_input.error = context.getString(R.string.summoner_search_failed_not_found)
+  }
+  
+  private fun startSearchAnimation(@DrawableRes animationId: Int) {
+    val create = AnimatedVectorDrawableCompat.create(context, animationId)
     search.setImageDrawable(create)
     (create as Animatable).start()
   }

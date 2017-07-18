@@ -66,4 +66,3 @@ class SplashScreenActivity : SplashView, MvpActivity<SplashView, SplashPresenter
   }
   
 }
-

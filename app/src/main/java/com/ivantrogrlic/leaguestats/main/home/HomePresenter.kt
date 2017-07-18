@@ -5,12 +5,14 @@ import android.content.SharedPreferences
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.model.ServiceProxy
+import com.ivantrogrlic.leaguestats.rest.HttpResponseCode.NOT_FOUND
 import com.ivantrogrlic.leaguestats.rest.RiotWebService
 import com.ivantrogrlic.leaguestats.util.Preferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.HttpException
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by ivanTrogrlic on 14/07/2017.
@@ -34,15 +36,16 @@ class HomePresenter constructor(private val context: Context,
   fun searchForSummoner(summoner: String) {
     riotWebService
         .summoner(summoner)
+        .timeout(10, TimeUnit.SECONDS)
         .firstOrError()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({ view.summonerLoaded(it) },
-                   {
-                     if (it is HttpException) {
-                       view.searchingFailed()
-                     }
-                   })
+        .subscribe({ view.summonerLoaded(it) }, { handleError(it) })
+  }
+  
+  private fun handleError(it: Throwable) {
+    if (it is HttpException && NOT_FOUND.code == it.code()) view.summonerNotFound()
+    else view.searchingFailed()
   }
   
 }

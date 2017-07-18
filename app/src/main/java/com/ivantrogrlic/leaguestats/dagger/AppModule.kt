@@ -13,9 +13,10 @@ import javax.inject.Singleton
 @Module(subcomponents = arrayOf(NetComponent::class))
 class AppModule {
   
-  @Provides
   @Singleton
-  fun provideContext(application: Application): Context = application
+  @Provides
+  @ApplicationContext
+  fun provideContext(application: Application): Context = application.applicationContext
   
   @Provides
   @Singleton
@@ -23,7 +24,8 @@ class AppModule {
   
   @Provides
   @Singleton
-  fun sharedPreferences(context: Context, sharedPreferencesName: String): SharedPreferences =
+  fun sharedPreferences(@ApplicationContext context: Context,
+                        sharedPreferencesName: String): SharedPreferences =
       context.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
   
 }

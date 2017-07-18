@@ -10,4 +10,5 @@ interface HomeView : MvpView {
   fun setHint(text: String)
   fun summonerLoaded(summoner: Summoner)
   fun searchingFailed()
+  fun summonerNotFound()
 }

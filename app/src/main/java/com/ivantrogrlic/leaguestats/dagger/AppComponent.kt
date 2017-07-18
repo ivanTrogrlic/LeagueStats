@@ -26,9 +26,10 @@ interface AppComponent {
   
   fun inject(app: LeagueStatsApplication)
   
-  fun netComponentBuilder(): NetComponent.Builder
-  
+  @ApplicationContext
   fun context(): Context
+  
+  fun netComponentBuilder(): NetComponent.Builder
   
   fun sharedPreferences(): SharedPreferences
   
