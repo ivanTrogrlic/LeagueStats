@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.ivantrogrlic.leaguestats.LeagueStatsApplication
-import com.ivantrogrlic.leaguestats.rest.NetComponent
+import com.ivantrogrlic.leaguestats.web.NetComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

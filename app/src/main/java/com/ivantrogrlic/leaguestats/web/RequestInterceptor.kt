@@ -1,4 +1,4 @@
-package com.ivantrogrlic.leaguestats.rest
+package com.ivantrogrlic.leaguestats.web
 
 import com.ivantrogrlic.leaguestats.BuildConfig
 import com.ivantrogrlic.leaguestats.dagger.PerServer

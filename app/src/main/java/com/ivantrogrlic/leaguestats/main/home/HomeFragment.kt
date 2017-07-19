@@ -1,5 +1,6 @@
 package com.ivantrogrlic.leaguestats.main.home
 
+import android.content.Intent
 import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.support.annotation.DrawableRes
@@ -10,14 +11,20 @@ import android.view.ViewGroup
 import com.hannesdorfmann.mosby3.mvp.MvpFragment
 import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
+import com.ivantrogrlic.leaguestats.main.summoner.SummonerActivity
 import com.ivantrogrlic.leaguestats.model.Summoner
 import kotlinx.android.synthetic.main.home_fragment.*
+import org.parceler.Parcels
 
 /**
  * Created by ivanTrogrlic on 14/07/2017.
  */
 
 class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
+  
+  companion object {
+    val SUMMONER_KEY = "SUMMONER_KEY"
+  }
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -49,7 +56,12 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
   }
   
   override fun summonerLoaded(summoner: Summoner) {
-    TODO("Navigate to the next activity")
+    val intent = Intent(context, SummonerActivity::class.java)
+    intent.putExtra(SUMMONER_KEY, Parcels.wrap(Summoner::class.java, summoner))
+    startActivity(intent)
+    
+    val create = AnimatedVectorDrawableCompat.create(context, R.drawable.search_animation)
+    search.setImageDrawable(create)
   }
   
   override fun searchingFailed() {

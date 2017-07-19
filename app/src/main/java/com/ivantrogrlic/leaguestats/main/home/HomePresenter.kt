@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.model.ServiceProxy
-import com.ivantrogrlic.leaguestats.rest.HttpResponseCode.NOT_FOUND
-import com.ivantrogrlic.leaguestats.rest.RiotWebService
+import com.ivantrogrlic.leaguestats.web.HttpResponseCode.NOT_FOUND
+import com.ivantrogrlic.leaguestats.web.RiotWebService
 import com.ivantrogrlic.leaguestats.util.Preferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

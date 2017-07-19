@@ -13,6 +13,7 @@
     <string name="search_for_summoner">Search for summoner</string>
     <string name="summoner_search_failed_not_found">Summoner not found</string>
     <string name="summoner_search_failed_general">Search failed. Please check your internet connection</string>
+    <string name="summoner_level" formatted="false">Level: %d</string>
     <string name="general_ok">OK</string>
 
     <string name="server_br">Brazil</string>
@@ -26,4 +27,6 @@
     <string name="server_tr">Turkey</string>
     <string name="server_jp">Japan</string>
     <string name="server_kr">Korea</string>
+    <string name="summoner_icon">Summoner icon</string>
+    <string name="rank_icon">Rank icon</string>
 </resources>

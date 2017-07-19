@@ -3,7 +3,7 @@ package com.ivantrogrlic.leaguestats.dagger
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.ivantrogrlic.leaguestats.rest.NetComponent
+import com.ivantrogrlic.leaguestats.web.NetComponent
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

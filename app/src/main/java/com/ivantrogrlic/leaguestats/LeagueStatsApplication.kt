@@ -4,8 +4,8 @@ import android.app.Activity
 import android.app.Application
 import com.ivantrogrlic.leaguestats.dagger.AppComponent
 import com.ivantrogrlic.leaguestats.dagger.DaggerAppComponent
-import com.ivantrogrlic.leaguestats.rest.NetComponent
-import com.ivantrogrlic.leaguestats.rest.NetModule
+import com.ivantrogrlic.leaguestats.web.NetComponent
+import com.ivantrogrlic.leaguestats.web.NetModule
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject

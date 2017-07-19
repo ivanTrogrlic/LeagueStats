@@ -1,4 +1,4 @@
-package com.ivantrogrlic.leaguestats.rest
+package com.ivantrogrlic.leaguestats.web
 
 /**
  * Created by ivanTrogrlic on 18/07/2017.
