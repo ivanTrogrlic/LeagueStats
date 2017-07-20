@@ -15,6 +15,16 @@
     <string name="summoner_search_failed_general">Search failed. Please check your internet connection</string>
     <string name="summoner_level" formatted="false">Level: %d</string>
     <string name="general_ok">OK</string>
+    <string name="ranked_solo">Ranked Solo</string>
+    <string name="flex_5v5">Flex 5v5</string>
+    <string name="ranked_3v3">Ranked 3v3</string>
+    <string name="tier_placeholder" formatted="false">%s %s</string>
+    <string name="league_points_placeholder" formatted="false">%dLP</string>
+    <string name="wins_losses_placeholder" formatted="false">%d wins / %d losses</string>
+    <string name="win_ratio_placeholder" formatted="false">%.2f%%</string>
+    <string name="wins_losses_default">- wins / - losses</string>
+    <string name="win_ratio_default">Win ratio:</string>
+    <string name="no_data_placeholder">-</string>
 
     <string name="server_br">Brazil</string>
     <string name="server_eune">EU Nordic &amp; East</string>
