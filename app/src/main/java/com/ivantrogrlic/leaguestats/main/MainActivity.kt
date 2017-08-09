@@ -19,7 +19,7 @@ class MainActivity : MainView, MvpActivity<MainView, MainPresenter>() {
     setContentView(R.layout.main_screen)
     
     val adapter = MainScreenAdapter(supportFragmentManager)
-    viewpager.adapter = adapter
+    viewPager.adapter = adapter
   }
   
   override fun doSomethig() {

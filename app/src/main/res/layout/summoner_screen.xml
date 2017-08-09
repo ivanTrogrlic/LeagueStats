@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:clipToPadding="false"
     android:orientation="vertical">
 
-    <Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:elevation="3dp"
-        android:logo="@mipmap/ic_logo"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/summoner_header_background"
+        android:background="@color/colorPrimary"
         android:paddingBottom="16dp"
         android:paddingEnd="24dp"
         android:paddingStart="24dp"
@@ -44,45 +36,33 @@
                 android:id="@+id/summoner_name"
                 style="@style/Base.TextAppearance.AppCompat.Body2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/summoner_level"
                 style="@style/Base.TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
     </RelativeLayout>
 
-    <ScrollView
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:tabTextColor="@color/white" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingBottom="24dp"
-            android:paddingEnd="24dp"
-            android:paddingStart="24dp">
-
-            <include
-                android:id="@+id/ranked_solo_card"
-                layout="@layout/rank_item" />
-
-            <include
-                android:id="@+id/team_flex_card"
-                layout="@layout/rank_item" />
-
-            <include
-                android:id="@+id/three_vs_three_card"
-                layout="@layout/rank_item" />
-
-        </LinearLayout>
-
-    </ScrollView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" />
 
 </LinearLayout>

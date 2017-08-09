@@ -41,7 +41,7 @@ android {
 
             resValue "string", "app_name", "LeagueStatsDev"
 
-            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-387f9a30-7e76-4881-a1fe-54693033227e"'
+            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-a9e17987-3ddb-4cad-bbc3-5087cda364d9"'
         }
 
     }
@@ -103,6 +103,8 @@ dependencies {
     // Parceler
     compile 'org.parceler:parceler-api:1.1.9'
     kapt 'org.parceler:parceler:1.1.9'
+
+    compile "org.jetbrains.anko:anko:0.10.1"
 
     // Test dependencies
     testCompile 'junit:junit:4.12'
