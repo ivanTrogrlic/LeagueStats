@@ -9,9 +9,9 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:paddingBottom="24dp"
-        android:paddingEnd="24dp"
-        android:paddingStart="24dp">
+        android:paddingBottom="16dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
         <include
             android:id="@+id/ranked_solo_card"

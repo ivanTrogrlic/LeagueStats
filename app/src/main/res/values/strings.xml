@@ -17,10 +17,10 @@
     <string name="general_ok">OK</string>
     <string name="ranked_solo">Ranked Solo</string>
     <string name="flex_5v5">Flex 5v5</string>
-    <string name="ranked_3v3">Ranked 3v3</string>
+    <string name="ranked_3v3">Flex 3v3</string>
     <string name="tier_placeholder" formatted="false">%s %s</string>
     <string name="league_points_placeholder" formatted="false">%dLP</string>
-    <string name="wins_losses_placeholder" formatted="false">%d wins / %d losses</string>
+    <string name="wins_losses_placeholder" formatted="false">%dW %dL</string>
     <string name="win_ratio_placeholder" formatted="false">%.2f%%</string>
     <string name="wins_losses_default">- wins / - losses</string>
     <string name="win_ratio_default">Win ratio:</string>
@@ -41,4 +41,5 @@
     <string name="server_kr">Korea</string>
     <string name="summoner_icon">Summoner icon</string>
     <string name="rank_icon">Rank icon</string>
+    <string name="unranked">Unranked</string>
 </resources>

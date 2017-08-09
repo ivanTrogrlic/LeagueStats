@@ -53,6 +53,7 @@ class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView {
     }
 
     private fun setupLeaguesView(it: LeaguePosition, cardView: View) {
+        prepareTextViews(cardView)
         cardView.rank_icon.setImageResource(it.getTierIcon())
         cardView.rank.text = getString(R.string.tier_placeholder, it.tier, it.rank)
         cardView.league_points.text = getString(R.string.league_points_placeholder, it.leaguePoints)
@@ -60,12 +61,19 @@ class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView {
         cardView.rank_name.text = it.leagueName
 
         val winPercentage = calculateWinRatio(it)
-        var textColor = ContextCompat.getColor(context, R.color.gray)
+        var textColor = ContextCompat.getColor(context, R.color.light_gray)
         if (winPercentage > 50) textColor = ContextCompat.getColor(context, R.color.green)
         if (winPercentage > 60) textColor = ContextCompat.getColor(context, R.color.light_red)
 
         cardView.win_loss_ratio.setTextColor(textColor)
         cardView.win_loss_ratio.text = getString(R.string.win_ratio_placeholder, winPercentage)
+    }
+
+    private fun prepareTextViews(cardView: View) {
+        cardView.rank_name.visibility = View.VISIBLE
+        cardView.win_ratio_container.visibility = View.VISIBLE
+        cardView.wins_losses.visibility = View.VISIBLE
+        cardView.league_points.visibility = View.VISIBLE
     }
 
     private fun setupLeaguePositionViews() {
