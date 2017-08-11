@@ -5,6 +5,7 @@ package com.ivantrogrlic.leaguestats.model
  */
 
 data class Participant(val stats: ParticipantStats,
+                       val participantId: Int,
                        val spell1Id: Int,
                        val spell2Id: Int,
                        val championId: Int)

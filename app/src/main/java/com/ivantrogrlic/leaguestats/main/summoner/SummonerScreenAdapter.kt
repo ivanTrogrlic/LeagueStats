@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.ivantrogrlic.leaguestats.main.home.HomeFragment
+import com.ivantrogrlic.leaguestats.main.summoner.games.GamesFragment
 import com.ivantrogrlic.leaguestats.main.summoner.ranks.RanksFragment
 import com.ivantrogrlic.leaguestats.model.Summoner
 import org.parceler.Parcels
@@ -22,7 +23,7 @@ class SummonerScreenAdapter(manager: FragmentManager, val summoner: Summoner) : 
         ranksFragment.arguments = bundle
         return when (position) {
             0 -> ranksFragment
-            1 -> ranksFragment //TODO
+            1 -> GamesFragment()
             else -> throw IllegalStateException("Illegal pager position: $position")
         }
     }
