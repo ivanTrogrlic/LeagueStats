@@ -6,3 +6,6 @@ package com.ivantrogrlic.leaguestats.web
 
 fun getProfileIconUrl(profileIconId: Int) =
     "http://ddragon.leagueoflegends.com/cdn/7.14.1/img/profileicon/$profileIconId.png"
+
+fun getItemIconUrl(itemIconId: Int) =
+        "http://ddragon.leagueoflegends.com/cdn/7.14.1/img/item/$itemIconId.png "

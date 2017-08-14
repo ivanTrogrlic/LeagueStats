@@ -37,7 +37,7 @@ class GamesFragment : GamesView, MvpFragment<GamesView, GamesPresenter>() {
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
-        gamesAdapter = GamesAdapter()
+        gamesAdapter = GamesAdapter(context)
         recyclerView.adapter = gamesAdapter
     }
 
