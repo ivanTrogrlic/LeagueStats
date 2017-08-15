@@ -7,4 +7,11 @@ package com.ivantrogrlic.leaguestats.model
 data class Match(val participants: List<Participant>,
                  val queue: Int,
                  val gameDuration: Long,
-                 val gameCreation: Long)
+                 val gameCreation: Long) {
+
+    fun getParticipant(): Participant {
+        if (participants.size > 1) throw IllegalStateException("Participant needs to be filtered out")
+        return participants.first()
+    }
+
+}

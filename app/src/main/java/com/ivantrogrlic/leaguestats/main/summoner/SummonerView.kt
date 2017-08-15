@@ -6,6 +6,4 @@ import com.ivantrogrlic.leaguestats.model.LeaguePosition
 /**
  * Created by ivanTrogrlic on 19/07/2017.
  */
-interface SummonerView : MvpView {
-  fun showLeaguePositions(leaguePositions: Set<LeaguePosition>)
-}
+interface SummonerView : MvpView

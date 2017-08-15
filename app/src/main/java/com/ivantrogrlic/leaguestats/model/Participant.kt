@@ -8,4 +8,7 @@ data class Participant(val stats: ParticipantStats,
                        val participantId: Int,
                        val spell1Id: Int,
                        val spell2Id: Int,
-                       val championId: Int)
+                       val championId: Int,
+                       val spell1Name: String?,
+                       val spell2Name: String?,
+                       val championName: String?)

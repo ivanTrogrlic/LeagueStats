@@ -6,7 +6,6 @@ import com.hannesdorfmann.mosby3.mvp.MvpActivity
 import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.main.home.HomeFragment
-import com.ivantrogrlic.leaguestats.model.LeaguePosition
 import com.ivantrogrlic.leaguestats.model.Summoner
 import com.ivantrogrlic.leaguestats.web.getProfileIconUrl
 import com.squareup.picasso.Picasso
@@ -19,8 +18,6 @@ import org.parceler.Parcels.unwrap
  */
 
 class SummonerActivity : SummonerView, MvpActivity<SummonerView, SummonerPresenter>() {
-    override fun showLeaguePositions(leaguePositions: Set<LeaguePosition>) {
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

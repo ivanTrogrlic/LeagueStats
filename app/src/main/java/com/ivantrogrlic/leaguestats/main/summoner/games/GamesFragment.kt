@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.mosby3.mvp.MvpFragment
+import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
+import com.ivantrogrlic.leaguestats.main.home.HomeFragment
 import com.ivantrogrlic.leaguestats.model.Match
+import com.ivantrogrlic.leaguestats.model.Summoner
 import kotlinx.android.synthetic.main.games_fragment.*
+import org.parceler.Parcels
 import java.util.*
 
 
@@ -37,12 +41,14 @@ class GamesFragment : GamesView, MvpFragment<GamesView, GamesPresenter>() {
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
+        val summoner = Parcels.unwrap<Summoner>(arguments.getParcelable(HomeFragment.SUMMONER_KEY))
         gamesAdapter = GamesAdapter(context)
         recyclerView.adapter = gamesAdapter
     }
 
     override fun createPresenter(): GamesPresenter {
-        return GamesPresenter()
+        val application = activity.application as LeagueStatsApplication
+        return GamesPresenter(context, application.netComponent()!!.retrofit())
     }
 
     override fun setMatches(matches: ArrayList<Match>) {
