@@ -10,19 +10,20 @@ import android.widget.TextView
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.model.Match
 import com.ivantrogrlic.leaguestats.model.queueName
+import com.ivantrogrlic.leaguestats.web.getChampionIconUrl
 import com.ivantrogrlic.leaguestats.web.getItemIconUrl
-import com.squareup.picasso.Picasso
+import com.ivantrogrlic.leaguestats.web.getSummonerIconUrl
+import com.squareup.picasso.Picasso.with
 import kotlinx.android.synthetic.main.game_item.view.*
-import java.util.*
 
 /**
  * Created by ivan on 8/11/2017.
  */
 class GamesAdapter(val context: Context) : RecyclerView.Adapter<GamesAdapter.GameHolder>() {
 
-    private var matches: ArrayList<Match>? = null
+    private var matches: List<Match> = emptyList()
 
-    fun setMatches(matches: ArrayList<Match>) {
+    fun setMatches(matches: List<Match>) {
         this.matches = matches
         notifyDataSetChanged()
     }
@@ -53,13 +54,19 @@ class GamesAdapter(val context: Context) : RecyclerView.Adapter<GamesAdapter.Gam
             matchTime.text = match.gameCreation.toString()
             matchLength.text = match.gameDuration.toString()
             matchLength.text = match.gameDuration.toString()
-            Picasso.with(context).load(getItemIconUrl(stats.item0)).into(item1)
-            Picasso.with(context).load(getItemIconUrl(stats.item1)).into(item2)
-            Picasso.with(context).load(getItemIconUrl(stats.item2)).into(item3)
-            Picasso.with(context).load(getItemIconUrl(stats.item3)).into(item4)
-            Picasso.with(context).load(getItemIconUrl(stats.item4)).into(item5)
-            Picasso.with(context).load(getItemIconUrl(stats.item5)).into(item6)
-            Picasso.with(context).load(getItemIconUrl(stats.item6)).into(trinket)
+            score.text = stats.kills.toString()
+            kda.text = ((stats.kills + stats.assists) / stats.deaths).toString()
+            cs.text = stats.totalMinionsKilled.toString()
+            with(context).load(getChampionIconUrl(participant.championName!!)).into(championIcon)
+            with(context).load(getSummonerIconUrl(participant.spell1Name!!)).into(summonerSpell1)
+            with(context).load(getSummonerIconUrl(participant.spell2Name!!)).into(summonerSpell2)
+            with(context).load(getItemIconUrl(stats.item0)).into(item1)
+            with(context).load(getItemIconUrl(stats.item1)).into(item2)
+            with(context).load(getItemIconUrl(stats.item2)).into(item3)
+            with(context).load(getItemIconUrl(stats.item3)).into(item4)
+            with(context).load(getItemIconUrl(stats.item4)).into(item5)
+            with(context).load(getItemIconUrl(stats.item5)).into(item6)
+            with(context).load(getItemIconUrl(stats.item6)).into(trinket)
         }
 
     }
@@ -72,10 +79,10 @@ class GamesAdapter(val context: Context) : RecyclerView.Adapter<GamesAdapter.Gam
     }
 
     override fun onBindViewHolder(holder: GameHolder, position: Int) {
-        matches?.let { holder.bindMatch(context, it[position]) }
+        matches.let { holder.bindMatch(context, it[position]) }
     }
 
     override fun getItemCount(): Int {
-        return matches?.size ?: 0
+        return matches.size
     }
 }

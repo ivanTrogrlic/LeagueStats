@@ -13,7 +13,6 @@ import com.ivantrogrlic.leaguestats.model.Match
 import com.ivantrogrlic.leaguestats.model.Summoner
 import kotlinx.android.synthetic.main.games_fragment.*
 import org.parceler.Parcels
-import java.util.*
 
 
 /**
@@ -41,17 +40,19 @@ class GamesFragment : GamesView, MvpFragment<GamesView, GamesPresenter>() {
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
-        val summoner = Parcels.unwrap<Summoner>(arguments.getParcelable(HomeFragment.SUMMONER_KEY))
         gamesAdapter = GamesAdapter(context)
         recyclerView.adapter = gamesAdapter
+
+        val summoner = Parcels.unwrap<Summoner>(arguments.getParcelable(HomeFragment.SUMMONER_KEY))
+        presenter.getRecentMatches(summoner)
     }
 
     override fun createPresenter(): GamesPresenter {
         val application = activity.application as LeagueStatsApplication
-        return GamesPresenter(context, application.netComponent()!!.retrofit())
+        return GamesPresenter(context, application.netComponent()!!.riotWebService())
     }
 
-    override fun setMatches(matches: ArrayList<Match>) {
+    override fun setMatches(matches: List<Match>) {
         gamesAdapter.setMatches(matches)
     }
 

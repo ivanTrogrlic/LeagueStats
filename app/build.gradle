@@ -58,7 +58,7 @@ android {
 
             resValue "string", "app_name", "LeagueStats"
 
-            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-a9e17987-3ddb-4cad-bbc3-5087cda364d9"'
+            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-ae5a4ebb-31d9-42a9-976e-f11c18398e9c"'
         }
 
         dev {
@@ -67,7 +67,7 @@ android {
 
             resValue "string", "app_name", "LeagueStatsDev"
 
-            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-a9e17987-3ddb-4cad-bbc3-5087cda364d9"'
+            buildConfigField "String", "RIOT_API_KEY", '"RGAPI-ae5a4ebb-31d9-42a9-976e-f11c18398e9c"'
         }
 
     }
@@ -109,9 +109,18 @@ dependencies {
     // Gson
     compile 'com.google.code.gson:gson:2.8.1'
     // Retrofit 2
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile('com.squareup.retrofit2:retrofit:2.3.0') {
+        exclude module: 'com.squareup.okio'
+    }
+    compile('com.squareup.retrofit2:converter-gson:2.3.0') {
+        exclude module: 'com.squareup.okio'
+    }
+    compile('com.squareup.retrofit2:adapter-rxjava2:2.3.0') {
+        exclude module: 'com.squareup.okio'
+    }
+    // OkHttp 3
+    compile('com.squareup.okhttp3:logging-interceptor:3.4.1')
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
     // Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     // Parceler

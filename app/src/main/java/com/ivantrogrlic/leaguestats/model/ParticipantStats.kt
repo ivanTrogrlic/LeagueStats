@@ -13,6 +13,7 @@ data class ParticipantStats(val deaths: Int,
                             val item4: Int,
                             val item5: Int,
                             val item6: Int,
+                            val totalMinionsKilled: Int,
                             val champLevel: Int,
                             val kills: Int,
                             val assists: Int)

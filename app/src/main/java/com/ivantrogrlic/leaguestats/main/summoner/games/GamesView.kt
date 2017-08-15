@@ -8,5 +8,5 @@ import java.util.*
  * Created by ivan on 8/9/2017.
  */
 interface GamesView : MvpView {
-    fun setMatches(matches: ArrayList<Match>)
+    fun setMatches(matches: List<Match>)
 }

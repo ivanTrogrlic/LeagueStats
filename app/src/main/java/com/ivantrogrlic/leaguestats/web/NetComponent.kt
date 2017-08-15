@@ -13,15 +13,16 @@ import retrofit2.Retrofit
 @PerServer
 @Subcomponent(modules = arrayOf(NetModule::class))
 interface NetComponent {
-  
-  fun retrofit(): Retrofit
-  fun okHttp(): OkHttpClient
-  fun requestInterceptor(): Interceptor
-  
-  @Subcomponent.Builder
-  interface Builder {
-    fun netModule(netModule: NetModule): Builder
-    fun build(): NetComponent
-  }
-  
+
+    fun retrofit(): Retrofit
+    fun okHttp(): OkHttpClient
+    fun requestInterceptor(): Interceptor
+    fun riotWebService(): RiotWebService
+
+    @Subcomponent.Builder
+    interface Builder {
+        fun netModule(netModule: NetModule): Builder
+        fun build(): NetComponent
+    }
+
 }

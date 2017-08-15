@@ -3,56 +3,71 @@ package com.ivantrogrlic.leaguestats.main.summoner.games
 import android.content.Context
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
-import com.ivantrogrlic.leaguestats.model.Champion
-import com.ivantrogrlic.leaguestats.model.Match
-import com.ivantrogrlic.leaguestats.model.SummonerSpell
+import com.ivantrogrlic.leaguestats.model.*
 import com.ivantrogrlic.leaguestats.web.RiotWebService
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Retrofit
 
 /**
  * Created by ivan on 8/9/2017.
  */
 
 class GamesPresenter(val context: Context,
-                     val retrofit: Retrofit) : MvpBasePresenter<GamesView>() {
+                     val riotWebService: RiotWebService) : MvpBasePresenter<GamesView>() {
 
-    fun getLeaguePositions(summonerId: Int, accountId: Long) {
-        val riotWebService = retrofit.create(RiotWebService::class.java)
+    fun getRecentMatches(summoner: Summoner) {
         riotWebService
-                .recentMatches(accountId)
+                .recentMatches(summoner.accountId)
                 .firstOrError()
-                .map { it.matches }
-                .flatMap {
-                    Flowable.fromIterable(it)
-                            .flatMap { riotWebService.match(it.gameId) }
-                            .map {
-                                val participant = it.participants.first { it.participantId == summonerId }
-                                it.copy(participants = listOf(participant))
-                            }
-                            .flatMap { match ->
-                                Flowable.combineLatest(
-                                        riotWebService.champion(match.getParticipant().championId),
-                                        riotWebService.summonerSpell(match.getParticipant().spell1Id),
-                                        riotWebService.summonerSpell(match.getParticipant().spell2Id),
-                                        Function3<Champion, SummonerSpell, SummonerSpell, Match> {
-                                            (champion), (summoner1), (summoner2) ->
-                                            match.copy(participants =
-                                            listOf(match.getParticipant().copy(
-                                                    championName = champion,
-                                                    spell1Name = summoner1,
-                                                    spell2Name = summoner2)))
-                                        }
-                                )
-                            }.toList()
-                }
+                .map { listOf(it.matches.first()) }
+                .flatMap { toMatches(it, summoner) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ TODO() },
-                        { Log.e("Trogy", "Failed loading league positions", it) })
+                .subscribe({ view.setMatches(it) },
+                        { Log.e("GamesPresenter", "Failed loading matches", it) })
     }
+
+    private fun toMatches(matchReferences: List<MatchReference>, summoner: Summoner): Single<List<Match>> =
+            Flowable.fromIterable(matchReferences)
+                    .flatMap { riotWebService.match(it.gameId, summoner.accountId) }
+                    .map { toMatchWithFilteredSummoner(it, summoner.id) }
+                    .flatMap { toMatchWithIconNames(it) }
+                    .toList()
+
+    private fun toMatchWithFilteredSummoner(match: Match, summonerId: Long): Match {
+        val participantId = match.participantIdentities
+                .filter { it.player != null }
+                .first { it.player!!.summonerId == summonerId }
+                .participantId
+        val participant = match.participants.first { it.participantId == participantId }
+        return match.copy(participant = participant)
+    }
+
+    private fun toMatchWithIconNames(match: Match): Flowable<Match> {
+        val participant = match.participant!!
+        return Flowable.combineLatest(
+                riotWebService.champion(participant.championId),
+                riotWebService.summonerSpell(participant.spell1Id),
+                riotWebService.summonerSpell(participant.spell2Id),
+                Function3<Champion, SummonerSpell, SummonerSpell, Match> {
+                    (champion), (summoner1), (summoner2) ->
+                    matchWithIconNames(match, participant, champion, summoner1, summoner2)
+                }
+        )
+    }
+
+    private fun matchWithIconNames(match: Match,
+                                   participant: Participant,
+                                   champion: String,
+                                   summoner1: String,
+                                   summoner2: String): Match =
+            match
+                    .copy(participants = listOf(
+                            participant.copy(championName = champion,
+                                    spell1Name = summoner1,
+                                    spell2Name = summoner2)))
 
 }

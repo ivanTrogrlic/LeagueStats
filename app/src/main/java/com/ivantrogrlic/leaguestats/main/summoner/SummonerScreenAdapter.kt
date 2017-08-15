@@ -17,13 +17,15 @@ import org.parceler.Parcels
 class SummonerScreenAdapter(manager: FragmentManager, val summoner: Summoner) : FragmentPagerAdapter(manager) {
 
     override fun getItem(position: Int): Fragment {
-        val ranksFragment = RanksFragment()
         val bundle = Bundle()
         bundle.putParcelable(HomeFragment.SUMMONER_KEY, Parcels.wrap(summoner))
+        val ranksFragment = RanksFragment()
+        val gamesFragment = GamesFragment()
         ranksFragment.arguments = bundle
+        gamesFragment.arguments = bundle
         return when (position) {
             0 -> ranksFragment
-            1 -> GamesFragment()
+            1 -> gamesFragment
             else -> throw IllegalStateException("Illegal pager position: $position")
         }
     }

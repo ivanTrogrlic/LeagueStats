@@ -22,7 +22,7 @@ interface RiotWebService {
     fun recentMatches(@Path("accountId") accountId: Long): Flowable<MatchList>
 
     @GET("/lol/match/v3/matches/{matchId}")
-    fun match(@Path("matchId") matchId: Long): Flowable<Match>
+    fun match(@Path("matchId") matchId: Long, @Query("forAccountId") accountId: Long): Flowable<Match>
 
     @GET("/lol/static-data/v3/champions/{championId}")
     fun champion(@Path("championId") championId: Int): Flowable<Champion>
