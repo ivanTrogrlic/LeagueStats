@@ -12,10 +12,10 @@ import retrofit2.Retrofit
  * Created by ivan on 8/9/2017.
  */
 class RanksPresenter(val context: Context,
-                     val retrofit: Retrofit) : MvpBasePresenter<RanksView>() {
+                     val riotWebService: RiotWebService) : MvpBasePresenter<RanksView>() {
 
     fun getLeaguePositions(summonerId: Long) {
-        retrofit.create(RiotWebService::class.java)
+        riotWebService
                 .leaguePositions(summonerId)
                 .firstOrError()
                 .subscribeOn(Schedulers.io())

@@ -2,7 +2,7 @@ package com.ivantrogrlic.leaguestats.main.summoner
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import com.hannesdorfmann.mosby3.mvp.MvpActivity
+import android.support.v7.app.AppCompatActivity
 import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.main.home.HomeFragment
@@ -17,7 +17,7 @@ import org.parceler.Parcels.unwrap
  * Created by ivanTrogrlic on 19/07/2017.
  */
 
-class SummonerActivity : SummonerView, MvpActivity<SummonerView, SummonerPresenter>() {
+class SummonerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +40,6 @@ class SummonerActivity : SummonerView, MvpActivity<SummonerView, SummonerPresent
     override fun onDestroy() {
         super.onDestroy()
         tabLayout.clearOnTabSelectedListeners()
-    }
-
-    override fun createPresenter(): SummonerPresenter {
-        val application = application as LeagueStatsApplication
-        return SummonerPresenter(application.component().context(),
-                application.netComponent()!!.retrofit())
     }
 
     private fun tabSelectedListener() =

@@ -7,30 +7,27 @@ import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.web.NetComponent
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 /** Created by ivanTrogrlic on 12/07/2017. */
 
 @Singleton
-@Component(modules = arrayOf(AndroidInjectionModule::class,
-                             AppModule::class,
-                             ActivitiesModule::class))
+@Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
-  
-  @Component.Builder
-  interface Builder {
-    @BindsInstance fun application(application: Application): Builder
-    fun build(): AppComponent
-  }
-  
-  fun inject(app: LeagueStatsApplication)
-  
-  @ApplicationContext
-  fun context(): Context
-  
-  fun netComponentBuilder(): NetComponent.Builder
-  
-  fun sharedPreferences(): SharedPreferences
-  
+
+    @Component.Builder
+    interface Builder {
+        @BindsInstance fun application(application: Application): Builder
+        fun build(): AppComponent
+    }
+
+    fun inject(app: LeagueStatsApplication)
+
+    @ApplicationContext
+    fun context(): Context
+
+    fun netComponentBuilder(): NetComponent.Builder
+
+    fun sharedPreferences(): SharedPreferences
+
 }

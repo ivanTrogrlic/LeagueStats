@@ -41,7 +41,7 @@ class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView {
     override fun createPresenter(): RanksPresenter {
         val application = activity.application as LeagueStatsApplication
         return RanksPresenter(application.component().context(),
-                application.netComponent()!!.retrofit())
+                application.netComponent()!!.riotWebService())
     }
 
     override fun showLeaguePositions(leaguePositions: Set<LeaguePosition>) {
