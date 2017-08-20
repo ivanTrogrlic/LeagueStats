@@ -16,7 +16,7 @@ Technologies this project is featuring:
   - [CircleCI](https://circleci.com)
   - [Detekt](https://github.com/arturbosch/detekt)
 
-Below you can some of the progress I've made:
+On the video below you can see some of the progress I've made:
 
 [![Watch the video](http://img.youtube.com/vi/wvSuWUR9k9Q/0.jpg)](https://youtu.be/wvSuWUR9k9Q)
  
