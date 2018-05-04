@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.ivantrogrlic.leaguestats.dagger.ApplicationContext
-import com.ivantrogrlic.leaguestats.dagger.PerFragment
 import com.ivantrogrlic.leaguestats.model.*
 import com.ivantrogrlic.leaguestats.web.RiotWebService
 import io.reactivex.Flowable
@@ -12,15 +11,13 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 /**
  * Created by ivan on 8/9/2017.
  */
 
-@PerFragment
-class GamesPresenter @Inject constructor(@ApplicationContext private val context: Context,
-                                         private val riotWebService: RiotWebService)
+class GamesPresenter constructor(@ApplicationContext private val context: Context,
+                                 private val riotWebService: RiotWebService)
     : MvpBasePresenter<GamesView>() {
 
     fun getRecentMatches(summoner: Summoner) {

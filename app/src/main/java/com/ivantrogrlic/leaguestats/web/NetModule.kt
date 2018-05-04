@@ -62,6 +62,7 @@ class NetModule {
 
     @Provides
     @Singleton
+    @Named("DEFAULT_RIOT_WEB_SERVICE")
     fun riotWebService(retrofit: Retrofit): RiotWebService =
             retrofit.create(RiotWebService::class.java)
 }
