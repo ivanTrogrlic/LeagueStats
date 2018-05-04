@@ -1,34 +1,56 @@
 package com.ivantrogrlic.leaguestats.main.home
 
-import android.graphics.drawable.Animatable
+import android.app.Activity
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.graphics.drawable.AnimatedVectorDrawableCompat
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.mosby3.mvp.MvpFragment
-import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.main.summoner.SummonerActivity
 import com.ivantrogrlic.leaguestats.model.Summoner
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.parceler.Parcels
+import javax.inject.Inject
 
 /**
  * Created by ivanTrogrlic on 14/07/2017.
  */
 
-class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
+class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView, HasSupportFragmentInjector {
 
     companion object {
-        val SUMMONER_KEY = "SUMMONER_KEY"
+        const val SUMMONER_KEY = "SUMMONER_KEY"
     }
+
+    @Inject
+    lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var homePresenter: HomePresenter
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return childFragmentInjector
+    }
+
+    override fun createPresenter() = homePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+    }
+
+    override fun onAttach(activity: Activity?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(activity)
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -44,13 +66,6 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
         }
     }
 
-    override fun createPresenter(): HomePresenter {
-        val application = activity.application as LeagueStatsApplication
-        return HomePresenter(application.component().context(),
-                application.component().sharedPreferences(),
-                application.netComponent()!!.retrofit())
-    }
-
     override fun setHint(text: String) {
         hint.text = text
     }
@@ -58,24 +73,32 @@ class HomeFragment : MvpFragment<HomeView, HomePresenter>(), HomeView {
     override fun summonerLoaded(summoner: Summoner) {
         startActivity<SummonerActivity>(SUMMONER_KEY to Parcels.wrap(Summoner::class.java, summoner))
 
-        val create = AnimatedVectorDrawableCompat.create(context, R.drawable.search_animation)
-        search.setImageDrawable(create)
+        context?.let {
+            val create = AnimatedVectorDrawableCompat.create(it, R.drawable.search_animation)
+            search.setImageDrawable(create)
+        }
     }
 
     override fun searchingFailed() {
-        startSearchAnimation(R.drawable.search_animation_stop)
-        summoner_input.error = context.getString(R.string.summoner_search_failed_general)
+        context?.let {
+            startSearchAnimation(R.drawable.search_animation_stop)
+            summoner_input.error = it.getString(R.string.summoner_search_failed_general)
+        }
     }
 
     override fun summonerNotFound() {
-        startSearchAnimation(R.drawable.search_animation_stop)
-        summoner_input.error = context.getString(R.string.summoner_search_failed_not_found)
+        context?.let {
+            startSearchAnimation(R.drawable.search_animation_stop)
+            summoner_input.error = it.getString(R.string.summoner_search_failed_not_found)
+        }
     }
 
     private fun startSearchAnimation(@DrawableRes animationId: Int) {
-        val create = AnimatedVectorDrawableCompat.create(context, animationId)
-        search.setImageDrawable(create)
-        (create as Animatable).start()
+        context?.let {
+            val create = AnimatedVectorDrawableCompat.create(it, animationId)
+            search.setImageDrawable(create)
+            create?.start()
+        }
     }
 
 }

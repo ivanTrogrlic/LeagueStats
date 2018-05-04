@@ -2,13 +2,12 @@ package com.ivantrogrlic.leaguestats.main.summoner
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
-import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.main.home.HomeFragment
 import com.ivantrogrlic.leaguestats.model.Summoner
 import com.ivantrogrlic.leaguestats.web.getProfileIconUrl
 import com.squareup.picasso.Picasso
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.summoner_screen.*
 import org.parceler.Parcels.unwrap
 
@@ -17,7 +16,7 @@ import org.parceler.Parcels.unwrap
  * Created by ivanTrogrlic on 19/07/2017.
  */
 
-class SummonerActivity : AppCompatActivity() {
+class SummonerActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +55,7 @@ class SummonerActivity : AppCompatActivity() {
             }
 
     private fun setupSummonerView(summoner: Summoner) {
-        Picasso.with(this).load(getProfileIconUrl(summoner.profileIconId)).into(summoner_icon)
+        Picasso.get().load(getProfileIconUrl(summoner.profileIconId)).into(summoner_icon)
         summoner_name.text = summoner.name
         summoner_level.text = resources.getString(R.string.summoner_level, summoner.summonerLevel)
     }

@@ -1,6 +1,9 @@
 package com.ivantrogrlic.leaguestats.web
 
-import com.ivantrogrlic.leaguestats.dagger.PerServer
+import android.content.SharedPreferences
+import com.ivantrogrlic.leaguestats.model.ServiceProxy
+import com.ivantrogrlic.leaguestats.util.Preferences.Companion.NO_SERVER_SELECTED
+import com.ivantrogrlic.leaguestats.util.Preferences.Companion.SERVER_PROXY_KEY
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -10,6 +13,8 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 
 
 /**
@@ -17,14 +22,14 @@ import java.util.concurrent.TimeUnit
  */
 
 @Module
-class NetModule(val baseUrl: String) {
+class NetModule {
 
     @Provides
-    @PerServer
+    @Singleton
     fun requestInterceptor(interceptor: RequestInterceptor): Interceptor = interceptor
 
     @Provides
-    @PerServer
+    @Singleton
     fun okHttpClient(requestInterceptor: Interceptor): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -37,9 +42,17 @@ class NetModule(val baseUrl: String) {
                 .build()
     }
 
-    @PerServer
     @Provides
-    fun retrofit(okHttpClient: OkHttpClient): Retrofit =
+    @Singleton
+    @Named("BASE_URL")
+    fun baseUrl(sharedPreferences: SharedPreferences): String {
+        val server = sharedPreferences.getString(SERVER_PROXY_KEY, NO_SERVER_SELECTED)
+        return ServiceProxy.valueOf(server).serverHost()
+    }
+
+    @Provides
+    @Singleton
+    fun retrofit(okHttpClient: OkHttpClient, @Named("BASE_URL") baseUrl: String): Retrofit =
             Retrofit.Builder()
                     .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -47,9 +60,8 @@ class NetModule(val baseUrl: String) {
                     .client(okHttpClient)
                     .build()
 
-    @PerServer
     @Provides
+    @Singleton
     fun riotWebService(retrofit: Retrofit): RiotWebService =
             retrofit.create(RiotWebService::class.java)
-
 }

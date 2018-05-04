@@ -1,29 +1,47 @@
 package com.ivantrogrlic.leaguestats.main.summoner.ranks
 
+import android.app.Activity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.mosby3.mvp.MvpFragment
-import com.ivantrogrlic.leaguestats.LeagueStatsApplication
 import com.ivantrogrlic.leaguestats.R
 import com.ivantrogrlic.leaguestats.main.home.HomeFragment
 import com.ivantrogrlic.leaguestats.model.LeaguePosition
 import com.ivantrogrlic.leaguestats.model.Summoner
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.rank_item.view.*
 import kotlinx.android.synthetic.main.ranks_page.*
 import org.parceler.Parcels
+import javax.inject.Inject
 
 /**
  * Created by ivan on 8/9/2017.
  */
 
-class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView {
+class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView, HasSupportFragmentInjector {
+
+    @Inject
+    lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var ranksPresenter: RanksPresenter
+
+    override fun supportFragmentInjector() = childFragmentInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+    }
+
+    override fun onAttach(activity: Activity?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(activity)
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -31,18 +49,14 @@ class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView {
                               savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.ranks_page, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val summoner = Parcels.unwrap<Summoner>(arguments.getParcelable(HomeFragment.SUMMONER_KEY))
+        val summoner = Parcels.unwrap<Summoner>(arguments!!.getParcelable(HomeFragment.SUMMONER_KEY))
         getPresenter().getLeaguePositions(summoner.id)
         setupLeaguePositionViews()
     }
 
-    override fun createPresenter(): RanksPresenter {
-        val application = activity.application as LeagueStatsApplication
-        return RanksPresenter(application.component().context(),
-                application.netComponent()!!.riotWebService())
-    }
+    override fun createPresenter() = ranksPresenter
 
     override fun showLeaguePositions(leaguePositions: Set<LeaguePosition>) {
         leaguePositions.forEach {
@@ -61,9 +75,9 @@ class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView {
         cardView.rank_name.text = it.leagueName
 
         val winPercentage = calculateWinRatio(it)
-        var textColor = ContextCompat.getColor(context, R.color.light_gray)
-        if (winPercentage > 50) textColor = ContextCompat.getColor(context, R.color.green)
-        if (winPercentage > 60) textColor = ContextCompat.getColor(context, R.color.light_red)
+        var textColor = ContextCompat.getColor(context!!, R.color.light_gray)
+        if (winPercentage > 50) textColor = ContextCompat.getColor(context!!, R.color.green)
+        if (winPercentage > 60) textColor = ContextCompat.getColor(context!!, R.color.light_red)
 
         cardView.win_loss_ratio.setTextColor(textColor)
         cardView.win_loss_ratio.text = getString(R.string.win_ratio_placeholder, winPercentage)
@@ -85,8 +99,7 @@ class RanksFragment : MvpFragment<RanksView, RanksPresenter>(), RanksView {
     private fun calculateWinRatio(it: LeaguePosition): Float {
         val totalGames = it.losses.toFloat() + it.wins.toFloat()
         val lossRatio = 1 - (it.losses / totalGames)
-        val winPercentage = lossRatio * 100
-        return winPercentage
+        return lossRatio * 100
     }
 
 }

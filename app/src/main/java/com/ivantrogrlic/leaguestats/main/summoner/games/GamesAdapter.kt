@@ -13,7 +13,7 @@ import com.ivantrogrlic.leaguestats.model.queueName
 import com.ivantrogrlic.leaguestats.web.getChampionIconUrl
 import com.ivantrogrlic.leaguestats.web.getItemIconUrl
 import com.ivantrogrlic.leaguestats.web.getSummonerIconUrl
-import com.squareup.picasso.Picasso.with
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.game_item.view.*
 
 /**
@@ -57,16 +57,16 @@ class GamesAdapter(val context: Context) : RecyclerView.Adapter<GamesAdapter.Gam
             score.text = stats.kills.toString()
             kda.text = ((stats.kills + stats.assists) / stats.deaths).toString()
             cs.text = stats.totalMinionsKilled.toString()
-            with(context).load(getChampionIconUrl(participant.championName!!)).into(championIcon)
-            with(context).load(getSummonerIconUrl(participant.spell1Name!!)).into(summonerSpell1)
-            with(context).load(getSummonerIconUrl(participant.spell2Name!!)).into(summonerSpell2)
-            with(context).load(getItemIconUrl(stats.item0)).into(item1)
-            with(context).load(getItemIconUrl(stats.item1)).into(item2)
-            with(context).load(getItemIconUrl(stats.item2)).into(item3)
-            with(context).load(getItemIconUrl(stats.item3)).into(item4)
-            with(context).load(getItemIconUrl(stats.item4)).into(item5)
-            with(context).load(getItemIconUrl(stats.item5)).into(item6)
-            with(context).load(getItemIconUrl(stats.item6)).into(trinket)
+            Picasso.get().load(getChampionIconUrl(participant.championName!!)).into(championIcon)
+            Picasso.get().load(getSummonerIconUrl(participant.spell1Name!!)).into(summonerSpell1)
+            Picasso.get().load(getSummonerIconUrl(participant.spell2Name!!)).into(summonerSpell2)
+            Picasso.get().load(getItemIconUrl(stats.item0)).into(item1)
+            Picasso.get().load(getItemIconUrl(stats.item1)).into(item2)
+            Picasso.get().load(getItemIconUrl(stats.item2)).into(item3)
+            Picasso.get().load(getItemIconUrl(stats.item3)).into(item4)
+            Picasso.get().load(getItemIconUrl(stats.item4)).into(item5)
+            Picasso.get().load(getItemIconUrl(stats.item5)).into(item6)
+            Picasso.get().load(getItemIconUrl(stats.item6)).into(trinket)
         }
 
     }

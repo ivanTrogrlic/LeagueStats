@@ -1,8 +1,8 @@
 package com.ivantrogrlic.leaguestats.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.ivantrogrlic.leaguestats.R
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.main_screen.*
 
 
@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.main_screen.*
  * Created by ivanTrogrlic on 12/07/2017.
  */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

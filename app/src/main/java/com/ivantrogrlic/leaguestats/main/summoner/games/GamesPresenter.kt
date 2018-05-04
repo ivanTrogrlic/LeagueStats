@@ -3,6 +3,8 @@ package com.ivantrogrlic.leaguestats.main.summoner.games
 import android.content.Context
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
+import com.ivantrogrlic.leaguestats.dagger.ApplicationContext
+import com.ivantrogrlic.leaguestats.dagger.PerFragment
 import com.ivantrogrlic.leaguestats.model.*
 import com.ivantrogrlic.leaguestats.web.RiotWebService
 import io.reactivex.Flowable
@@ -10,13 +12,16 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 /**
  * Created by ivan on 8/9/2017.
  */
 
-class GamesPresenter(val context: Context,
-                     val riotWebService: RiotWebService) : MvpBasePresenter<GamesView>() {
+@PerFragment
+class GamesPresenter @Inject constructor(@ApplicationContext private val context: Context,
+                                         private val riotWebService: RiotWebService)
+    : MvpBasePresenter<GamesView>() {
 
     fun getRecentMatches(summoner: Summoner) {
         riotWebService
@@ -52,8 +57,7 @@ class GamesPresenter(val context: Context,
                 riotWebService.champion(participant.championId),
                 riotWebService.summonerSpell(participant.spell1Id),
                 riotWebService.summonerSpell(participant.spell2Id),
-                Function3<Champion, SummonerSpell, SummonerSpell, Match> {
-                    (champion), (summoner1), (summoner2) ->
+                Function3<Champion, SummonerSpell, SummonerSpell, Match> { (champion), (summoner1), (summoner2) ->
                     matchWithIconNames(match, participant, champion, summoner1, summoner2)
                 }
         )
